@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install Python 3 and CA certificates (no third-party packages needed)
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends python3 ca-certificates && \
+    apt-get install -y --no-install-recommends python3 python3-requests ca-certificates && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
