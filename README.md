@@ -72,7 +72,7 @@ docker run --rm starwars-api
 
 ## Configuration
 
-In `script.py`, the API base URL is:
+In `script.py`, the **secure** API base URL is:
 
 ```python
 BASE = "https://swapi.info/api"
@@ -83,6 +83,9 @@ If that service is temporarily unavailable, switch to:
 ```python
 BASE = "https://swapi.dev/api"
 ```
+> [!CAUTION]
+> This URL base has an expired certificate as of 5/2/2026.
+
 
 ## Project Structure
 
