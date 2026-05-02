@@ -1,10 +1,20 @@
 import requests
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-BASE = "https://swapi.info/api"
+# Disables expired cert warnings when using swapi.dev/api
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+# dev/api has an expired cert,
+# Switch the base to info/api for secure json gathering.
+BASE = "https://swapi.dev/api"
+#BASE = "https://swapi.info/api"
 
 def fetch_json(url):
-    resp = requests.get(url, timeout=10)
+    # verify=False is a temporary workaround to an expired certificate serverside
+    # it is unsafe and leaves me open to middle-man attacks so remove it when
+    # reaching out to swapi.info/api
+    resp = requests.get(url, timeout=10, verify=False)
     resp.raise_for_status()
     return resp.json()
 
@@ -13,10 +23,10 @@ def get_all_starships():
     starships = []
     while url:
         data = fetch_json(url)
-        if isinstance(data, dict):
+        if isinstance(data, dict): # Checks if returned info is a dictionary
             results = data.get("results", []) or []
             next_url = data.get("next")
-        elif isinstance(data, list):
+        elif isinstance(data, list): # Checks if returned info is a list
             results = data or []
             next_url = None
         else:
@@ -34,6 +44,8 @@ def get_name_for(url):
 
 def main():
     starships = get_all_starships()
+
+    # Start multiple threads to speed up information gathering
     with ThreadPoolExecutor(max_workers=10) as ex:
         for idx, ship in enumerate(starships, 1):
             name = ship.get("name") or "Unknown"
