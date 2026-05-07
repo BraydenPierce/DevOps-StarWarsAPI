@@ -22,13 +22,13 @@ This project fetches starships from `swapi.info`, then resolves each starship's 
 Pull image:
 
 ```powershell
-docker pull ghcr.io/braydenpierce/starwars-api:latest
+docker pull ghcr.io/braydenpierce/devops-starwarsapi:latest
 ```
 
 Run container:
 
 ```powershell
-docker run --rm ghcr.io/braydenpierce/starwars-api:latest
+docker run --rm ghcr.io/braydenpierce/devops-starwarsapi:latest
 ```
 
 ## Example Output
