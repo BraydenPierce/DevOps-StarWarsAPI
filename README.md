@@ -14,47 +14,21 @@ This project fetches starships from `swapi.info`, then resolves each starship's 
 
 ## Prerequisites
 
-Choose one of these options:
-
-- Local Python run:
-	- Python 3.9+
-	- `requests` package
-- Docker run:
-	- Docker Desktop (or Docker Engine)
-
-## Run Locally
-
-### 1) Create and activate a virtual environment (recommended)
-
-```powershell
-py -m venv .venv
-.\.venv\Scripts\Activate.ps1
-```
-
-### 2) Install dependency
-
-```powershell
-pip install requests
-```
-
-### 3) Run
-
-```powershell
-py script.py
-```
+- Docker Desktop (or Docker Engine)
+- Github account (to pull from GitHub Packages)
 
 ## Run with Docker
 
-Build image:
+Pull image:
 
 ```powershell
-docker build -t starwars-api .
+docker pull ghcr.io/braydenpierce/starwars-api:latest
 ```
 
 Run container:
 
 ```powershell
-docker run --rm starwars-api
+docker run --rm ghcr.io/braydenpierce/starwars-api:latest
 ```
 
 ## Example Output
@@ -87,25 +61,7 @@ BASE = "https://swapi.dev/api"
 > This URL base has an expired certificate as of 5/2/2026.
 
 
-## Project Structure
-
-```text
-.
-|-- Dockerfile
-|-- README.md
-`-- script.py
-```
-
 ## Troubleshooting
-
-### `ModuleNotFoundError: No module named 'requests'`
-
-- Local run: install dependency with `pip install requests`
-- Docker run: rebuild the image after Dockerfile updates:
-
-```powershell
-docker build --no-cache -t starwars-api .
-```
 
 ### API shape errors (`'list' object has no attribute 'get'`)
 
